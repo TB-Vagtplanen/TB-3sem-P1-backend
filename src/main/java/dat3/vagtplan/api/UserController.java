@@ -38,6 +38,19 @@ public class UserController {
     }
 
 
+    @PatchMapping("/enabled/{username}")
+    Boolean flipEnabled(@PathVariable String username) {
+        return userService.flipEnabled(username);
+    }
+
+    @PatchMapping("/enabled/{username}/{value}")
+    Boolean switchEnabled(@PathVariable String username, @PathVariable boolean value) {
+        return userService.switchEnabled(username,value);
+    }
+
+
+
+
 
 
 }

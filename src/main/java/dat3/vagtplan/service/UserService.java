@@ -5,6 +5,7 @@ import dat3.vagtplan.dto.UserRequest;
 import dat3.vagtplan.dto.UserResponse;
 import dat3.vagtplan.entity.User;
 import dat3.vagtplan.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +33,20 @@ public class UserService {
     public Boolean deleteUser(String username) {
         userRepository.deleteById(username);
         return true;
+    }
+
+    public Boolean flipEnabled(String username) {
+        User user = userRepository.findById(username).orElseThrow(() -> new EntityNotFoundException("No such username found"));
+        boolean value = !user.isEnabled();
+        user.setEnabled(value);
+        userRepository.save(user);
+        return value;
+    }
+
+    public Boolean switchEnabled(String username, boolean value) {
+        User user = userRepository.findById(username).orElseThrow(() -> new EntityNotFoundException("No such username found"));
+        user.setEnabled(value);
+        userRepository.save(user);
+        return value;
     }
 }
