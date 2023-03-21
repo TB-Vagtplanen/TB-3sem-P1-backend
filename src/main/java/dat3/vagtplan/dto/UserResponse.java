@@ -47,7 +47,6 @@ public class UserResponse {
         this.phones = user.getPhones();
         this.shifts = user.getShifts();
 
-
     }
 
 }
