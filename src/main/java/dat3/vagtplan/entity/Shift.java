@@ -1,7 +1,6 @@
 package dat3.vagtplan.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +18,16 @@ import java.util.Optional;
 @Entity
 public class Shift {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate date;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
     private int workHours;
-    private List<> workers = new List<Worker>;
+
+    public Shift(Long id, Date date, int workHours) {
+        this.id = id;
+        this.date = date;
+        this.workHours = workHours;
+    }
 }
