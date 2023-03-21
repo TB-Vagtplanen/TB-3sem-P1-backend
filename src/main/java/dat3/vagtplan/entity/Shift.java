@@ -8,7 +8,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @NoArgsConstructor
 @Setter
@@ -19,5 +21,5 @@ public class Shift {
     private Long id;
     private LocalDate date;
     private int workHours;
-    private List<Worker> workers;
+    private List<> workers = new List<Worker>;
 }
