@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShiftResponse {
     Long id;
-    LocalDate date;
+    Date date;
     int workHours;
 
     public ShiftResponse(Shift shift){
