@@ -32,6 +32,12 @@ public class UserController {
         return userService.addUser(userRequest);
     }
 
+    @DeleteMapping("/{username}")
+    Boolean deleteUser(@PathVariable String username) {
+        return userService.deleteUser(username);
+    }
+
+
 
 
 }

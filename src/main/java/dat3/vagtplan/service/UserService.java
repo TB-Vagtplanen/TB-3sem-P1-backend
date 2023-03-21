@@ -28,4 +28,9 @@ public class UserService {
         User user = userRepository.save(UserRequest.getUserEntity(body));
         return new UserResponse(user);
     }
+
+    public Boolean deleteUser(String username) {
+        userRepository.deleteById(username);
+        return true;
+    }
 }
