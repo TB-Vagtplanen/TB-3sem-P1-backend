@@ -18,8 +18,14 @@ public class ShiftController {
         this.shiftService = shiftService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            path = "/makeShift"  )
     public ShiftResponse addShift(@RequestBody ShiftRequest body){
         return shiftService.addShift(body);
+    }
+    @PostMapping("/addUserToShift")
+    public ShiftResponse updateShift(@RequestBody ShiftRequest body){
+        return shiftService.updateShift(body);
     }
 }

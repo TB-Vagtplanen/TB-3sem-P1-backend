@@ -7,13 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @NoArgsConstructor
 @Getter
@@ -33,11 +30,10 @@ public class Shift {
     private String location;
 
     @ManyToOne
+    @javax.validation.constraints.NotNull
     private User user;
 
 
-
-    //private String worker;
 
     public Shift(LocalDate date, LocalTime workHours, String location) {
         this.date = date;
@@ -45,5 +41,7 @@ public class Shift {
         this.location = location;
 
     }
+
+
 
 }
