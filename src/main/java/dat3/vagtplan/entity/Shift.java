@@ -28,13 +28,10 @@ public class Shift {
     private int workHours;
 
     //private String worker;
-    @ManyToOne
-    private Worker worker;
 
-    public Shift(Long id, LocalDate date, int workHours, Worker worker) {
+    public Shift(Long id, LocalDate date, int workHours) {
         this.id = id;
         this.date = date;
         this.workHours = workHours;
-        this.worker = worker;
     }
 }

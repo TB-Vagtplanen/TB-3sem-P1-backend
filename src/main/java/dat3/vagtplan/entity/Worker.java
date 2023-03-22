@@ -20,8 +20,6 @@ public class Worker {
     private String lastName;
     private double pay;
 
-    @OneToMany(mappedBy = "worker")
-    private ArrayList<Shift> shifts;
 
    /* public Worker(String userName, String lastName, double pay){
         this.userName = userName;
@@ -29,11 +27,10 @@ public class Worker {
         this.pay = pay;
     }*/
 
-    public Worker(String userName, String lastName, double pay, ArrayList<Shift> shifts){
+    public Worker(String userName, String lastName, double pay){
         this.userName = userName;
         this.lastName = lastName;
         this.pay = pay;
-        this.shifts = shifts;
     }
 
 }

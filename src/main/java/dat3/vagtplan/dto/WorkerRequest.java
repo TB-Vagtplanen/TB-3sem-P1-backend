@@ -16,7 +16,6 @@ public class WorkerRequest {
     String userName;
     String lastName;
     double pay;
-    ArrayList<Shift> shifts;
 
     /* public Worker getWorkerEntity(WorkerRequest workerRequest){
         return new Worker(workerRequest.userName, workerRequest.getLastName(), workerRequest.getPay()
@@ -24,7 +23,6 @@ public class WorkerRequest {
     }*/
 
     public static Worker getWorkerEntity(WorkerRequest workerRequest){
-        return new Worker(workerRequest.userName, workerRequest.getLastName(), workerRequest.getPay(),
-        workerRequest.getShifts());
+        return new Worker(workerRequest.userName, workerRequest.getLastName(), workerRequest.getPay());
     }
 }

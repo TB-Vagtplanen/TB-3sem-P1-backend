@@ -21,7 +21,6 @@ public class ShiftRequest {
     Worker worker;
 
     public static Shift getShiftEntity(ShiftRequest shiftRequest){
-        return new Shift(shiftRequest.id, shiftRequest.getDate(), shiftRequest.getWorkHours(),
-                shiftRequest.getWorker());
+        return new Shift(shiftRequest.id, shiftRequest.getDate(), shiftRequest.getWorkHours());
     }
 }

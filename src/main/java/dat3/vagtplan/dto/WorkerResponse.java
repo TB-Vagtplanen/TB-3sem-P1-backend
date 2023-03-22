@@ -18,13 +18,11 @@ public class WorkerResponse {
     String userName;
     String lastName;
     double pay;
-    ArrayList<Shift> shifts;
 
     public WorkerResponse(Worker worker){
         this.userName = worker.getUserName();
         this.lastName = worker.getLastName();
         this.pay = worker.getPay();
-        this.shifts = worker.getShifts();
     }
 
 }

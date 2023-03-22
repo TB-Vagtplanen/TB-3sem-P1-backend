@@ -20,12 +20,10 @@ public class ShiftResponse {
     int workHours;
     //String worker;
 
-    Worker worker;
 
     public ShiftResponse(Shift shift){
         this.id = shift.getId();
         this.date = shift.getDate();
         this.workHours = shift.getWorkHours();
-        this.worker = shift.getWorker();
     }
 }
