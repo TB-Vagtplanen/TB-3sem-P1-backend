@@ -4,9 +4,11 @@ import dat3.vagtplan.dto.ShiftRequest;
 import dat3.vagtplan.dto.ShiftResponse;
 import dat3.vagtplan.service.ShiftService;
 import org.apache.coyote.Request;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("api/shifts")
 public class ShiftController {
 
@@ -16,8 +18,8 @@ public class ShiftController {
         this.shiftService = shiftService;
     }
 
-    @PostMapping
-    ShiftResponse addShift(@RequestBody ShiftRequest body){
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ShiftResponse addShift(@RequestBody ShiftRequest body){
         return shiftService.addShift(body);
     }
 }
