@@ -1,5 +1,6 @@
 package dat3.vagtplan.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +23,18 @@ public class Shift {
     private Long id;
 
     @Temporal(TemporalType.DATE)
-    private Date date;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
     private int workHours;
 
-    public Shift(Long id, Date date, int workHours) {
+    //private String worker;
+    @ManyToOne
+    private Worker worker;
+
+    public Shift(Long id, LocalDate date, int workHours, Worker worker) {
         this.id = id;
         this.date = date;
         this.workHours = workHours;
+        this.worker = worker;
     }
 }

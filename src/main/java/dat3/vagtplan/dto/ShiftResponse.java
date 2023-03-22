@@ -2,6 +2,7 @@ package dat3.vagtplan.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import dat3.vagtplan.entity.Shift;
+import dat3.vagtplan.entity.Worker;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,12 +16,16 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShiftResponse {
     Long id;
-    Date date;
+    LocalDate date;
     int workHours;
+    //String worker;
+
+    Worker worker;
 
     public ShiftResponse(Shift shift){
         this.id = shift.getId();
         this.date = shift.getDate();
         this.workHours = shift.getWorkHours();
+        this.worker = shift.getWorker();
     }
 }
