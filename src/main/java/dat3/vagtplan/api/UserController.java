@@ -37,6 +37,11 @@ public class UserController {
         return userService.findUser(username);
     }
 
+    @PutMapping()
+    UserResponse editUser(@RequestBody UserRequest body) {
+        return userService.editUser(body);
+    }
+
 
     @DeleteMapping("/{username}")
     Boolean deleteUser(@PathVariable String username) {

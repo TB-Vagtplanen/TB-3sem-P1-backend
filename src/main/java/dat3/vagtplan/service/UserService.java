@@ -53,4 +53,9 @@ public class UserService {
     public UserResponse findUser(String username) {
         return new UserResponse(userRepository.findByUsername(username));
     }
+
+    public UserResponse editUser(UserRequest body) {
+        //TODO
+        return null;
+    }
 }
