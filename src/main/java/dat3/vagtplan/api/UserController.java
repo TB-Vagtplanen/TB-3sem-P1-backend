@@ -32,6 +32,12 @@ public class UserController {
         return userService.addUser(userRequest);
     }
 
+    @GetMapping("/{username}")
+    UserResponse findUser(@PathVariable String username) {
+        return userService.findUser(username);
+    }
+
+
     @DeleteMapping("/{username}")
     Boolean deleteUser(@PathVariable String username) {
         return userService.deleteUser(username);
