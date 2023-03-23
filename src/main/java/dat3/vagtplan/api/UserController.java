@@ -37,6 +37,36 @@ public class UserController {
         return userService.addUser(userRequest);
     }
 
+    @GetMapping("/{username}")
+    UserResponse findUser(@PathVariable String username) {
+        return userService.findUser(username);
+    }
+
+    @PutMapping()
+    UserResponse editUser(@RequestBody UserRequest body) {
+        return userService.editUser(body);
+    }
+
+
+    @DeleteMapping("/{username}")
+    Boolean deleteUser(@PathVariable String username) {
+        return userService.deleteUser(username);
+    }
+
+
+    @PatchMapping("/enabled/{username}")
+    Boolean flipEnabled(@PathVariable String username) {
+        return userService.flipEnabled(username);
+    }
+
+    @PatchMapping("/enabled/{username}/{value}")
+    Boolean switchEnabled(@PathVariable String username, @PathVariable boolean value) {
+        return userService.switchEnabled(username,value);
+    }
+
+
+
+
 
 
 }

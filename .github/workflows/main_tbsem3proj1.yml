@@ -29,6 +29,7 @@ jobs:
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          retention-days: 1
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,5 +50,5 @@ jobs:
         with:
           app-name: 'TBsem3proj1'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_826D9C8440084145ABA908D027133D97 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F3073428A4324BFBAB62DA5CB306F853 }}
           package: '*.jar'
