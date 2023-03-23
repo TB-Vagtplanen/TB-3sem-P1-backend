@@ -1,6 +1,7 @@
 package dat3.vagtplan.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,7 +46,8 @@ public class User extends UserWithRoles {
     private Map<String,String> phones = new HashMap<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "username")
     List<Shift> shifts = new ArrayList<>();
 
     public void addPhone(String description, String phonenumber) {
@@ -53,6 +55,14 @@ public class User extends UserWithRoles {
             phones = new HashMap<>();
         }
         phones.put(description,phonenumber);
+    }
+
+    public void addShift(Shift shift){
+        if (shifts == null){
+            shifts = new ArrayList<>();
+        }
+        shifts.add(shift);
+        shift.setUsername(this);
     }
 
 

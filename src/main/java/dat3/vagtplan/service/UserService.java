@@ -6,6 +6,7 @@ import dat3.vagtplan.dto.UserResponse;
 import dat3.vagtplan.entity.User;
 import dat3.vagtplan.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class UserService {
         User user = userRepository.save(UserRequest.getUserEntity(body));
         return new UserResponse(user);
     }
+
 
     public Boolean deleteUser(String username) {
         userRepository.deleteById(username);
