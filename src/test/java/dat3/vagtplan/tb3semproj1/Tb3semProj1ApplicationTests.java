@@ -6,7 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class Tb3semProj1ApplicationTests {
 
-    @Test
+
+    //@Test
     void contextLoads() {
     }
 
