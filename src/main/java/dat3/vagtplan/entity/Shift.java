@@ -1,6 +1,7 @@
 package dat3.vagtplan.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,9 +30,10 @@ public class Shift {
     private LocalTime workHours;
     private String location;
 
+    @JsonBackReference
     @ManyToOne
     @javax.validation.constraints.NotNull
-    private User user;
+    private User username;
 
 
 

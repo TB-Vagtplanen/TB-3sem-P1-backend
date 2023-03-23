@@ -25,7 +25,7 @@ public class ShiftRequest {
 
     String location;
     @NotNull
-    String user;
+    String username;
 
     public static Shift getShiftEntity(ShiftRequest shiftRequest){
         return new Shift(shiftRequest.getDate(), shiftRequest.getWorkHours(),

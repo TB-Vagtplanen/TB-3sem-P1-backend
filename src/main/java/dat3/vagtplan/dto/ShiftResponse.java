@@ -24,7 +24,7 @@ public class ShiftResponse {
 
     String location;
 
-    User user;
+    User username;
 
 
     public ShiftResponse(Shift shift){
@@ -32,6 +32,6 @@ public class ShiftResponse {
         this.date = shift.getDate();
         this.workHours = shift.getWorkHours();
         this.location = shift.getLocation();
-        this.user = shift.getUser();
+        this.username = shift.getUsername();
     }
 }
