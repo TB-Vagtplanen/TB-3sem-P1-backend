@@ -27,11 +27,6 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{username}")
-    UserResponse getUserByUsername(@PathVariable String username){
-        return userService.findUser(username);
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     UserResponse addUser(@RequestBody UserRequest userRequest) {
         return userService.addUser(userRequest);
