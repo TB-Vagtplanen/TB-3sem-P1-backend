@@ -70,7 +70,7 @@ public class ShiftService {
             editShift.setLocation(body.getLocation());
         }
         if (body.getUsername() != null){
-            editShift.setUsername(userRepository.findById(body.getUsername()).orElseThrow(() ->
+            editShift.setUser(userRepository.findById(body.getUsername()).orElseThrow(() ->
                     new EntityNotFoundException()));
         }
         shiftRepository.save(editShift);

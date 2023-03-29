@@ -22,13 +22,13 @@ public class ShiftRequest {
     LocalDate date;
     @JsonFormat(pattern = "HH:mm:ss")
     LocalTime workHours;
-
     String location;
     @NotNull
     String username;
+    Boolean isSick;
 
     public static Shift getShiftEntity(ShiftRequest shiftRequest){
         return new Shift(shiftRequest.getDate(), shiftRequest.getWorkHours(),
-                shiftRequest.getLocation());
+                shiftRequest.getLocation(), shiftRequest.getIsSick());
     }
 }

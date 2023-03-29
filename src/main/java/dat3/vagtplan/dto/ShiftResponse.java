@@ -23,15 +23,16 @@ public class ShiftResponse {
     LocalTime workHours;
 
     String location;
+    User user;
 
-    User username;
-
+    Boolean isSick;
 
     public ShiftResponse(Shift shift){
         this.id = shift.getId();
         this.date = shift.getDate();
         this.workHours = shift.getWorkHours();
         this.location = shift.getLocation();
-        this.username = shift.getUsername();
+        this.user = shift.getUser();
+        this.isSick = shift.getIsSick();
     }
 }

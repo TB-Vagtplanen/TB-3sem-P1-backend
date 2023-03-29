@@ -3,10 +3,9 @@ package dat3.vagtplan.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 import java.time.LocalDate;
@@ -16,7 +15,8 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Getter
 @Setter
-
+@Builder
+@AllArgsConstructor
 @Entity
 public class Shift {
     @Id
@@ -30,17 +30,18 @@ public class Shift {
     private LocalTime workHours;
     private String location;
 
-    @JsonBackReference
+    private Boolean isSick;
+
     @ManyToOne
-    @javax.validation.constraints.NotNull
-    private User username;
+    private User user;
 
 
 
-    public Shift(LocalDate date, LocalTime workHours, String location) {
+    public Shift(LocalDate date, LocalTime workHours, String location, Boolean isSick) {
         this.date = date;
         this.workHours = workHours;
         this.location = location;
+        this.isSick = isSick;
 
     }
 

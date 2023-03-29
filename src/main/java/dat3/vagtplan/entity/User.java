@@ -1,6 +1,7 @@
 package dat3.vagtplan.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dat3.security.entity.UserWithRoles;
 import jakarta.persistence.*;
@@ -34,7 +35,7 @@ public class User extends UserWithRoles {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @CreationTimestamp
-    private LocalDateTime created;
+    private LocalDateTime creationDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @UpdateTimestamp
@@ -46,8 +47,8 @@ public class User extends UserWithRoles {
     private Map<String,String> phones = new HashMap<>();
 
 
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "username")
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
     List<Shift> shifts = new ArrayList<>();
 
     public void addPhone(String description, String phonenumber) {
@@ -62,7 +63,7 @@ public class User extends UserWithRoles {
             shifts = new ArrayList<>();
         }
         shifts.add(shift);
-        shift.setUsername(this);
+        shift.setUser(this);
     }
 
 

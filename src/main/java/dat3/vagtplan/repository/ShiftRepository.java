@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShiftRepository extends JpaRepository<Shift,Long> {
     @Modifying
-    @Query("update Shift s SET s.username = :value where s.id = :id")
+    @Query("update Shift s SET s.user = :value where s.id = :id")
     void updateUser(@Param("id") Long id, @Param("value") User user);
 
 }
