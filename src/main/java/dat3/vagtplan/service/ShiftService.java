@@ -19,6 +19,9 @@ public class ShiftService {
     static UserRepository userRepository;
 
     static ShiftRepository shiftRepository;
+    public ShiftService(){
+        this(null,null);
+    }
 
     public ShiftService(UserRepository userRepository, ShiftRepository shiftRepository) {
         this.userRepository = userRepository;
@@ -27,9 +30,14 @@ public class ShiftService {
 
     public ShiftResponse addShift(ShiftRequest body) {
         Shift shift = ShiftRequest.getShiftEntity(body);
+        User user = userRepository.findByUsername(body.getUsername()).orElseThrow(() ->
+                new EntityNotFoundException("User not found"));
+
+        shift.setUsername(user);
         shift = shiftRepository.save(shift);
 
-        return new ShiftResponse(shift);}
+        return new ShiftResponse(shift);
+    }
 
     @Transactional
     public ShiftResponse updateShift(ShiftRequest body) {
@@ -58,13 +66,14 @@ public class ShiftService {
     }
 
     public static ResponseEntity<Boolean> editShift(ShiftRequest body, Long id) {
+
         Shift editShift = shiftRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Could not find shift!"));
-        if (body.getDate() != null){
-            editShift.setDate(body.getDate());
+        if (body.getWorkStart() != null){
+            editShift.setWorkStart(body.getWorkStart());
         }
-        if (body.getWorkHours() != null){
-            editShift.setWorkHours(body.getWorkHours());
+        if (body.getWorkEnd() != null){
+            editShift.setWorkEnd(body.getWorkEnd());
         }
         if (body.getLocation() != null){
             editShift.setLocation(body.getLocation());

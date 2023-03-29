@@ -27,10 +27,6 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{username}")
-    UserResponse getUserByID(@PathVariable String username){
-        return userService.getUserByID(username);
-    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     UserResponse addUser(@RequestBody UserRequest userRequest) {

@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @NoArgsConstructor
@@ -23,11 +24,11 @@ public class Shift {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime workStart;
 
-    @JsonFormat(pattern = "HH:mm:ss")
-    private LocalTime workHours;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime workEnd;
     private String location;
 
     @JsonBackReference
@@ -37,9 +38,9 @@ public class Shift {
 
 
 
-    public Shift(LocalDate date, LocalTime workHours, String location) {
-        this.date = date;
-        this.workHours = workHours;
+    public Shift(LocalDateTime workStart, LocalDateTime workEnd, String location) {
+        this.workStart = workStart;
+        this.workEnd = workEnd;
         this.location = location;
 
     }

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -17,10 +19,10 @@ import java.time.LocalTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShiftResponse {
     Long id;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    LocalDate date;
-    @JsonFormat(pattern = "HH:mm:ss")
-    LocalTime workHours;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime workStart;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    LocalDateTime workEnd;
 
     String location;
 
@@ -29,9 +31,26 @@ public class ShiftResponse {
 
     public ShiftResponse(Shift shift){
         this.id = shift.getId();
-        this.date = shift.getDate();
-        this.workHours = shift.getWorkHours();
+        this.workStart = shift.getWorkStart();
+        this.workEnd = shift.getWorkEnd();
         this.location = shift.getLocation();
         this.username = shift.getUsername();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShiftResponse that = (ShiftResponse) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(workStart, that.workStart) &&
+                Objects.equals(workEnd, that.workEnd) &&
+                Objects.equals(location, that.location) &&
+                Objects.equals(username, that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, workStart, workEnd, location, username);
     }
 }
