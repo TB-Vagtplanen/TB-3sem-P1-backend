@@ -30,6 +30,12 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/active")
+    List<UserResponse> getActiveUsers() {
+        return userService.getActiveUsers();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     UserResponse addUser(@RequestBody UserRequest userRequest) {
         return userService.addUser(userRequest);
