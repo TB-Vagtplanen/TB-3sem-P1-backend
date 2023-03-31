@@ -10,6 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Controller
@@ -303,26 +304,26 @@ public class DeveloperData implements ApplicationRunner {
         //Dummy data with shifts.
 
         Shift shift1 = Shift.builder()
-                .date(LocalDate.parse("2023-03-22"))
-                .workHours(LocalTime.parse("08:00:00"))
+                .workStart(LocalDateTime.parse("2023-03-22T08:00:00"))
+                .workEnd(LocalDateTime.parse("2023-03-22T12:00:00"))
                 .location("På gulvet")
                 .isSick(false)
                 .build();
 
 
         Shift shift2 = Shift.builder()
-                .date(LocalDate.parse("2023-03-23"))
-                .workHours(LocalTime.parse("08:00:00"))
-                .location("I kassen")
+                .workStart(LocalDateTime.parse("2023-03-23T08:00:00"))
+                .workEnd(LocalDateTime.parse("2023-03-23T12:00:00"))
+                .location("På gulvet")
                 .isSick(false)
                 .build();
 
 
         Shift shift3 = Shift.builder()
-                .date(LocalDate.parse("2023-03-24"))
-                .workHours(LocalTime.parse("08:00:00"))
-                .location("På gulvet")
-                .isSick(false)
+                .workStart(LocalDateTime.parse("2023-05-22T08:00:00"))
+                .workEnd(LocalDateTime.parse("2023-05-22T12:00:00"))
+                .location("I kassen")
+                .isSick(true)
                 .build();
 
 
