@@ -43,7 +43,6 @@ public class UserRequest {
         if (body.role != null) {
             user.addRole(body.getRole());
         }
-        System.out.println(body);
         return user;
 
     }
