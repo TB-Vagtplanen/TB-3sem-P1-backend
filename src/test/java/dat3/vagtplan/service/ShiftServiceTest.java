@@ -32,6 +32,10 @@ public class ShiftServiceTest {
     Boolean readyData = false;
     int listSize = 3;
 
+    private Shift shift1;
+    private Shift shift2;
+    private Shift shift3;
+
     @BeforeEach
     void setUp(){
         if (!readyData) {
@@ -51,24 +55,27 @@ public class ShiftServiceTest {
             user.setShifts(new ArrayList<Shift>());
             userRepository.save(user);
 
-            shiftRepository.save(Shift.builder()
+             shift1 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,10,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,10,24,9,5,5))
                     .location("TestStreet")
                     .isSick(false)
-                    .build());
-            shiftRepository.save(Shift.builder()
+                    .build();
+             shift2 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,11,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,11,24,9,5,5))
                     .location("TestStreet2")
                     .isSick(false)
-                    .build());
-            shiftRepository.save(Shift.builder()
+                    .build();
+             shift3 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,12,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,12,24,9,5,5))
                     .location("TestStreet3")
                     .isSick(false)
-                    .build());
+                    .build();
+            shiftRepository.save(shift1);
+            shiftRepository.save(shift2);
+            shiftRepository.save(shift3);
             readyData = true;
             shiftService = new ShiftService(userRepository,shiftRepository);
         }
@@ -111,7 +118,19 @@ public class ShiftServiceTest {
     }
 
     @Test
-    void getSpecificShift(){}
+    void getSpecificShift(){
+       ShiftResponse shift = shiftService.getSpecificShift(2);
+
+       //the setup generates 3 shifts
+        // so if correctly generated ids 1-3 should be available to be found
+        // i chose shift2 so if i use the getSpecificShift method to get id = 2
+        // it should be equal to shift2
+        assertEquals(shift2.getId() , shift.getId());
+        assertEquals(shift2.getWorkStart() , shift.getWorkStart());
+        assertEquals(shift2.getWorkEnd() , shift.getWorkEnd());
+        assertEquals(shift2.getLocation() , shift.getLocation());
+        assertEquals(shift2.getIsSick() , shift.getIsSick());
+    }
 
     @Test
     void editShift(){}
