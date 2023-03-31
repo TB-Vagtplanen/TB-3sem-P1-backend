@@ -27,7 +27,8 @@ public class ShiftService {
 
     public ShiftResponse addShift(ShiftRequest body) {
         Shift shift = ShiftRequest.getShiftEntity(body);
-        User user = userRepository.findByUsername(body.getUsername());
+        User user = userRepository.findByUsername(body.getUsername()).orElseThrow(()->
+                new EntityNotFoundException("User Not Found!"));
 
         shift.setUser(user);
         shift = shiftRepository.save(shift);
