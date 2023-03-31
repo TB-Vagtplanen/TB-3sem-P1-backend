@@ -36,9 +36,9 @@ public class Shift {
 
 
 
-    public Shift(LocalDateTime date, LocalDateTime workHours, String location, Boolean isSick) {
+    public Shift(LocalDateTime date, LocalDateTime workEnd, String location, Boolean isSick) {
         this.workStart = date;
-        this.workEnd = workHours;
+        this.workEnd = workEnd;
         this.location = location;
         this.isSick = isSick;
 

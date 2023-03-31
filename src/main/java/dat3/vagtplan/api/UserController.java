@@ -23,7 +23,6 @@ public class UserController {
 
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     List<UserResponse> getUsers() {
         return userService.getUsers();
