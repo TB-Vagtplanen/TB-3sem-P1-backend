@@ -40,18 +40,18 @@ public class ShiftController {
     }
 
     @GetMapping("/{id}")
-    public ShiftResponse getSpecificShift(@PathVariable Long id){
+    public ShiftResponse getSpecificShift(@PathVariable int id){
         return shiftService.getSpecificShift(id);
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Boolean> editShift(@RequestBody ShiftRequest body, @PathVariable Long id){
+    ResponseEntity<Boolean> editShift(@RequestBody ShiftRequest body, @PathVariable int id){
         ShiftService.editShift(body,id);
         return ResponseEntity.ok(true);
     }
 
     @DeleteMapping("/{id}")
-    void deleteShiftById(@PathVariable Long id){
+    void deleteShiftById(@PathVariable int id){
         shiftService.deleteShiftById(id);
     }
 

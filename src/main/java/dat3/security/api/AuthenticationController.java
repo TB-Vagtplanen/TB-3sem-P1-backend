@@ -5,10 +5,9 @@ import dat3.security.dto.LoginResponse;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwsHeader;
@@ -16,6 +15,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -73,8 +73,9 @@ public class AuthenticationController {
       return ResponseEntity.ok()
               .body(new LoginResponse(user.getUsername(),token,roles));
     } catch (BadCredentialsException ex) {
-      throw ex;
-      //throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Username or password wrong");
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Username or password wrong");
+    } catch (LockedException ex){
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"User account is locked");
     }
   }
 }

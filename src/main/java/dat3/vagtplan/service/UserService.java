@@ -55,7 +55,7 @@ public class UserService {
     }
 
     public UserResponse findUser(String username) {
-        return new UserResponse(userRepository.findByUsername(username));
+        return new UserResponse(userRepository.findById(username).orElseThrow(() -> new EntityNotFoundException("Couldn't find user")));
     }
 
 
@@ -74,5 +74,9 @@ public class UserService {
         Optional.ofNullable(body.getPhones()).ifPresent( user :: setPhones);
 
         return new UserResponse(userRepository.save(user));
+    }
+
+    public List<UserResponse> getActiveUsers() {
+        return userRepository.findAll().stream().filter(user -> user.isEnabled()).map( user -> new UserResponse(user)).toList();
     }
 }

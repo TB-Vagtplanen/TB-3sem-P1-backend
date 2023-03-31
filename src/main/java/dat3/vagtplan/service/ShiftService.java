@@ -27,7 +27,11 @@ public class ShiftService {
 
     public ShiftResponse addShift(ShiftRequest body) {
         Shift shift = ShiftRequest.getShiftEntity(body);
+        User user = userRepository.findById(body.getUsername()).orElseThrow(()->new EntityNotFoundException("User could not be found."));
+        shift.setUser(user);
+        System.out.println(user.getUsername());
         shift = shiftRepository.save(shift);
+        System.out.println(shift.getUser().getUsername());
 
         return new ShiftResponse(shift);}
 
@@ -51,26 +55,26 @@ public class ShiftService {
 
     }
 
-    public ShiftResponse getSpecificShift(Long id) {
+    public ShiftResponse getSpecificShift(int id) {
         Shift shift = shiftRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Could not find shift!"));
         return new ShiftResponse(shift);
     }
 
-    public static ResponseEntity<Boolean> editShift(ShiftRequest body, Long id) {
+    public static ResponseEntity<Boolean> editShift(ShiftRequest body, int id) {
         Shift editShift = shiftRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Could not find shift!"));
-        if (body.getDate() != null){
-            editShift.setDate(body.getDate());
+        if (body.getWorkStart() != null){
+            editShift.setWorkStart(body.getWorkStart());
         }
-        if (body.getWorkHours() != null){
-            editShift.setWorkHours(body.getWorkHours());
+        if (body.getWorkEnd() != null){
+            editShift.setWorkEnd(body.getWorkEnd());
         }
         if (body.getLocation() != null){
             editShift.setLocation(body.getLocation());
         }
         if (body.getUsername() != null){
-            editShift.setUsername(userRepository.findById(body.getUsername()).orElseThrow(() ->
+            editShift.setUser(userRepository.findById(body.getUsername()).orElseThrow(() ->
                     new EntityNotFoundException()));
         }
         shiftRepository.save(editShift);
@@ -78,7 +82,7 @@ public class ShiftService {
         return ResponseEntity.ok(true);
     }
 
-    public void deleteShiftById(Long id) {
+    public void deleteShiftById(int id) {
         shiftRepository.deleteById(id);
     }
    /* public ShiftResponse addShift(ShiftRequest body) {

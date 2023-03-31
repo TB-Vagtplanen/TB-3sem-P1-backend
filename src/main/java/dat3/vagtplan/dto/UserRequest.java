@@ -1,11 +1,13 @@
 package dat3.vagtplan.dto;
 
+import dat3.security.entity.Role;
 import dat3.vagtplan.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,7 +24,7 @@ public class UserRequest {
     String username;
     String password;
     Map<String, String> phones = new HashMap<>();
-
+    Role role;
 
 
     public static User getUserEntity(UserRequest body) {
@@ -37,6 +39,10 @@ public class UserRequest {
         user.setUsername(body.getUsername());
         user.setPhones(body.getPhones());
         user.setEmail(body.getEmail());
+
+        if (body.role != null) {
+            user.addRole(body.getRole());
+        }
         return user;
 
     }

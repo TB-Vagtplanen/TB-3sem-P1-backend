@@ -25,6 +25,8 @@ public class UserResponse {
     private String username;
     private String firstName;
     private String lastName;
+
+    private String email;
     private String street;
     private String zip;
     private String city;
@@ -44,6 +46,7 @@ public class UserResponse {
         this.username = user.getUsername();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
+        this.email = user.getEmail();
         this.phones = user.getPhones();
         this.shifts = user.getShifts();
 
