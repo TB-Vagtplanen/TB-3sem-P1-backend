@@ -41,7 +41,7 @@ public class UserController {
         return userService.addUser(userRequest);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     @GetMapping("/{username}")
     UserResponse findUser(@PathVariable String username) {
         return userService.findUser(username);
