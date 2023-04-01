@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -26,7 +30,7 @@ public class ShiftResponse {
 
     Boolean isSick;
 
-    public ShiftResponse(Shift shift){
+    public ShiftResponse(Shift shift) {
         this.id = shift.getId();
         this.workStart = shift.getWorkStart();
         this.workEnd = shift.getWorkEnd();
