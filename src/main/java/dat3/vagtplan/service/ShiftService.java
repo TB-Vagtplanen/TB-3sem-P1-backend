@@ -61,7 +61,7 @@ public class ShiftService {
         return new ShiftResponse(shift);
     }
 
-    public static ResponseEntity<Boolean> editShift(ShiftRequest body, int id) {
+    public ResponseEntity<Boolean> editShift(ShiftRequest body, int id) {
         Shift editShift = shiftRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Could not find shift!"));
         if (body.getWorkStart() != null){
@@ -72,6 +72,9 @@ public class ShiftService {
         }
         if (body.getLocation() != null){
             editShift.setLocation(body.getLocation());
+        }
+        if (body.getIsSick() != null){
+            editShift.setIsSick(body.getIsSick());
         }
         if (body.getUsername() != null){
             editShift.setUser(userRepository.findById(body.getUsername()).orElseThrow(() ->

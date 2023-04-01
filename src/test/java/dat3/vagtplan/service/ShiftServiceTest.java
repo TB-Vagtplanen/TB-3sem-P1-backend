@@ -32,6 +32,8 @@ public class ShiftServiceTest {
     Boolean readyData = false;
     int listSize = 3;
 
+    private User user;
+
     private Shift shift1;
     private Shift shift2;
     private Shift shift3;
@@ -40,7 +42,7 @@ public class ShiftServiceTest {
     void setUp(){
         if (!readyData) {
             //Creation of test data
-            User user = new User();
+            user = new User();
             user.setUsername("barboe");
             user.setEmail("TestMail");
             user.setPassword("HerpDerp");
@@ -107,8 +109,6 @@ public class ShiftServiceTest {
         assertEquals(shift.getIsSick(), response.getIsSick());
     }
 
-    @Test
-    void updateShift(){}
 
     @Test
     void getAllShifts(){
@@ -133,9 +133,32 @@ public class ShiftServiceTest {
     }
 
     @Test
-    void editShift(){}
+    void editShift(){
+        ShiftRequest expected = ShiftRequest.builder()
+                .workStart(LocalDateTime.of(2025,10,23,10,5,5))
+                .workEnd(LocalDateTime.of(2025,10,24,15,5,5))
+                .location("EditedLocal")
+                .isSick(true)
+                .build();
+
+        shiftService.editShift(expected, shift1.getId());
+
+        assertEquals(shift1.getWorkStart(), expected.getWorkStart());
+        assertEquals(shift1.getWorkEnd(), expected.getWorkEnd());
+        assertEquals(shift1.getLocation(), expected.getLocation());
+        assertEquals(shift1.getIsSick(), expected.getIsSick());
+
+    }
 
     @Test
-    void deleteShiftById(){}
+    void deleteShiftById(){
+        //confirm exsistance of object to be deleted
+        System.out.println(shift1.getId() + "delete test");
+        //deleting the object
+        shiftService.deleteShiftById(shift1.getId());
+
+        //deleted object should be null
+        assertFalse(shiftRepository.existsById(shift1.getId()));
+    }
 
 }

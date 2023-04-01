@@ -46,7 +46,7 @@ public class ShiftController {
 
     @PutMapping("/{id}")
     ResponseEntity<Boolean> editShift(@RequestBody ShiftRequest body, @PathVariable int id){
-        ShiftService.editShift(body,id);
+        shiftService.editShift(body,id);
         return ResponseEntity.ok(true);
     }
 
