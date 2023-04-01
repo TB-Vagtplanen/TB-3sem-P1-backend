@@ -6,6 +6,7 @@ import dat3.vagtplan.entity.Shift;
 import dat3.vagtplan.entity.User;
 import dat3.vagtplan.repository.ShiftRepository;
 import dat3.vagtplan.repository.UserRepository;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ShiftServiceTest {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     ShiftService shiftService;
     Boolean readyData = false;
@@ -57,19 +61,19 @@ public class ShiftServiceTest {
             user.setShifts(new ArrayList<Shift>());
             userRepository.save(user);
 
-             shift1 = Shift.builder()
+            shift1 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,10,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,10,24,9,5,5))
                     .location("TestStreet")
                     .isSick(false)
                     .build();
-             shift2 = Shift.builder()
+            shift2 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,11,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,11,24,9,5,5))
                     .location("TestStreet2")
                     .isSick(false)
                     .build();
-             shift3 = Shift.builder()
+            shift3 = Shift.builder()
                     .workStart(LocalDateTime.of(2020,12,23,5,5,5))
                     .workEnd(LocalDateTime.of(2020,12,24,9,5,5))
                     .location("TestStreet3")
@@ -119,17 +123,26 @@ public class ShiftServiceTest {
 
     @Test
     void getSpecificShift(){
-       ShiftResponse shift = shiftService.getSpecificShift(2);
+        entityManager.createNativeQuery("ALTER TABLE shift ALTER COLUMN id RESTART WITH 1").executeUpdate();
+
+        Shift shift = Shift.builder()
+                .workStart(LocalDateTime.of(2020,10,23,5,5,5))
+                .workEnd(LocalDateTime.of(2020,10,24,9,5,5))
+                .location("TestStreet")
+                .isSick(false)
+                .build();
+        shiftRepository.save(shift);
+        ShiftResponse getShift = shiftService.getSpecificShift(1);
 
        //the setup generates 3 shifts
         // so if correctly generated ids 1-3 should be available to be found
         // i chose shift2 so if i use the getSpecificShift method to get id = 2
         // it should be equal to shift2
-        assertEquals(shift2.getId() , shift.getId());
-        assertEquals(shift2.getWorkStart() , shift.getWorkStart());
-        assertEquals(shift2.getWorkEnd() , shift.getWorkEnd());
-        assertEquals(shift2.getLocation() , shift.getLocation());
-        assertEquals(shift2.getIsSick() , shift.getIsSick());
+        assertEquals(shift.getId() , getShift.getId());
+        assertEquals(shift.getWorkStart() , getShift.getWorkStart());
+        assertEquals(shift.getWorkEnd() , getShift.getWorkEnd());
+        assertEquals(shift.getLocation() , getShift.getLocation());
+        assertEquals(shift.getIsSick() , getShift.getIsSick());
     }
 
     @Test
