@@ -1,6 +1,7 @@
 package dat3.vagtplan.service;
 
 
+import com.google.api.services.gmail.Gmail;
 import dat3.vagtplan.dto.UserRequest;
 import dat3.vagtplan.dto.UserResponse;
 import dat3.vagtplan.entity.User;
@@ -10,6 +11,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,8 +32,16 @@ public class UserService {
     }
 
 
-    public UserResponse addUser(UserRequest body) {
+    public UserResponse addUser(UserRequest body){
         User user = userRepository.save(UserRequest.getUserEntity(body));
+
+        try {
+            GmailOAuth gm = new GmailOAuth();
+            gm.sendMail(body.getUsername(),body.getPassword(),"kristianwede90@gmail.com");
+
+        } catch (GeneralSecurityException | IOException | MessagingException ex) {
+            ex.printStackTrace();
+        }
         return new UserResponse(user);
     }
 
