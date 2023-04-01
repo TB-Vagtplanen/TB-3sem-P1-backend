@@ -153,11 +153,11 @@ public class ShiftServiceTest {
     @Test
     void deleteShiftById(){
         //confirm exsistance of object to be deleted
-        System.out.println(shift1.getId() + "delete test");
+        System.out.println(shift1.getId() + " delete test");
         //deleting the object
         shiftService.deleteShiftById(shift1.getId());
 
-        //deleted object should be null
+        //Confirm object no longer exsists
         assertFalse(shiftRepository.existsById(shift1.getId()));
     }
 
